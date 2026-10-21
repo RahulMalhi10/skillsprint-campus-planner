@@ -62,7 +62,7 @@ The application uses browser Local Storage to save tasks and learning progress.
 
 ## 🌐 Live Demo
 
-Coming soon.
+Live Demo Link: https://rahulmalhi10.github.io/skillsprint-campus-planner/
 
 ## 👨‍💻 Author
 
