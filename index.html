@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080b16" />
+  <title>SkillSprint — Campus Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#overview" aria-label="SkillSprint home">
+        <span class="brand-mark"><span></span><span></span><span></span><span></span></span>
+        <span>skill<span class="brand-accent">sprint</span><small>CAMPUS PLANNER</small></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-list" aria-label="Main navigation">
+        <button class="nav-item active" data-view="overview"><span class="nav-icon">◈</span> Overview</button>
+        <button class="nav-item" data-view="timetable"><span class="nav-icon">▦</span> My timetable</button>
+        <button class="nav-item" data-view="tasks"><span class="nav-icon">☑</span> Tasks & assignments <span class="nav-count" id="taskNavCount">0</span></button>
+        <button class="nav-item" data-view="skills"><span class="nav-icon">⌁</span> Skill roadmap</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="mini-profile">
+          <div class="avatar">RM</div>
+          <div><strong>Campus student</strong><small>BSCS · VI-A Morning</small></div>
+          <span class="online-dot"></span>
+        </div>
+        <div class="sidebar-note"><span class="pulse"></span> Your semester, in sync.</div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Toggle navigation">☰</button>
+        <div class="breadcrumb"><span>Workspace</span><b>/</b><strong id="pageCrumb">Overview</strong></div>
+        <div class="top-actions">
+          <div class="semester-chip"><span class="tiny-dot"></span> FALL 2026</div>
+          <button class="icon-button" id="todayButton" title="Go to today's schedule">◷</button>
+          <div class="top-avatar">RM</div>
+        </div>
+      </header>
+
+      <section class="view active" id="view-overview">
+        <div class="welcome-row">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-line"></span> YOUR PERSONAL COMMAND CENTER</div>
+            <h1>Make this semester<br><span class="gradient-text">count.</span></h1>
+            <p class="subhead">One space for your classes, coursework, and the skills you're building next.</p>
+          </div>
+          <div class="date-panel"><span class="date-label">TODAY IS</span><strong id="todayDate">Loading date…</strong><span id="todayDay" class="date-day"></span></div>
+        </div>
+
+        <div class="stat-grid">
+          <article class="stat-card"><div class="stat-top"><span>CLASSES TODAY</span><span class="stat-icon violet">▦</span></div><div class="stat-number" id="classesToday">0</div><div class="stat-foot"><span class="stat-bullet violet-bg"></span><span id="classesTodayNote">Check your schedule</span></div></article>
+          <article class="stat-card"><div class="stat-top"><span>WEEKLY CLASSES</span><span class="stat-icon cyan">◷</span></div><div class="stat-number">12 <small>sessions</small></div><div class="stat-foot"><span class="stat-bullet cyan-bg"></span><span>6 theory · 6 lab sessions</span></div></article>
+          <article class="stat-card"><div class="stat-top"><span>TASKS TO FINISH</span><span class="stat-icon amber">☑</span></div><div class="stat-number" id="pendingTasks">0</div><div class="stat-foot"><span class="stat-bullet amber-bg"></span><span id="taskSummary">Build your study rhythm</span></div></article>
+          <article class="stat-card"><div class="stat-top"><span>SKILL PROGRESS</span><span class="stat-icon green">↗</span></div><div class="stat-number" id="skillAverage">0<small>%</small></div><div class="stat-foot"><span class="stat-bullet green-bg"></span><span>Across your learning goals</span></div></article>
+        </div>
+
+        <div class="content-grid">
+          <section class="panel schedule-panel">
+            <div class="panel-heading"><div><div class="section-kicker">YOUR DAY, AT A GLANCE</div><h2>Today's schedule</h2></div><button class="text-button" data-goto="timetable">Full timetable <span>↗</span></button></div>
+            <div class="today-summary"><span class="today-summary-icon">✦</span><span id="todaySummaryText">Your schedule will appear here.</span></div>
+            <div class="today-list" id="todaySchedule"></div>
+          </section>
+          <section class="panel focus-panel">
+            <div class="panel-heading"><div><div class="section-kicker">SMALL STEPS, BIG WINS</div><h2>Study focus</h2></div><span class="focus-spark">✳</span></div>
+            <div class="focus-orb"><div class="orb-ring"></div><div class="orb-center"><span id="focusPercent">0%</span><small>COMPLETE</small></div></div>
+            <p class="focus-copy">Progress isn't about doing everything. It's about showing up consistently.</p>
+            <div class="progress-track"><span id="focusProgress"></span></div>
+            <div class="focus-meta"><span>Task completion</span><strong id="focusMeta">0 of 0 tasks</strong></div>
+            <button class="primary-button full-button" data-goto="tasks">Open task list <span>→</span></button>
+          </section>
+        </div>
+
+        <section class="panel week-panel">
+          <div class="panel-heading"><div><div class="section-kicker">MONDAY — SUNDAY</div><h2>Your week, mapped out</h2></div><button class="text-button" data-goto="timetable">Manage schedule <span>↗</span></button></div>
+          <div class="week-strip" id="weekStrip"></div>
+        </section>
+        <footer class="footer"><span>SKILLSPRINT CAMPUS PLANNER</span><span>Designed for your next level <b>✦</b></span></footer>
+      </section>
+
+      <section class="view" id="view-timetable">
+        <div class="page-title-row"><div><div class="eyebrow"><span class="eyebrow-line"></span> FALL 2026 · MORNING</div><h1>My <span class="gradient-text">timetable.</span></h1><p class="subhead">BSCS-VI-A · Sindh Madressatul Islam University</p></div><div class="legend"><span><i class="legend-box theory"></i>Theory</span><span><i class="legend-box lab"></i>Lab</span></div></div>
+        <div class="panel timetable-panel">
+          <div class="timetable-toolbar"><div><span class="section-kicker">WEEKLY CLASS SCHEDULE</span><p>From 28 September 2026 <span class="muted">· Tentative</span></p></div><button class="outline-button" id="downloadSchedule">Export schedule ↧</button></div>
+          <div class="table-wrap"><table class="timetable" id="timetableTable"><thead><tr><th>DAY</th><th>9 AM</th><th>10 AM</th><th>11 AM</th><th>12 PM</th><th>1 PM</th><th>2 PM</th><th>3 PM</th></tr></thead><tbody id="timetableBody"></tbody></table></div>
+          <div class="table-foot"><span>Theory: <b>6 courses</b> · 12 contact hrs/week</span><span>Lab: <b>6 sessions</b> · 6 contact hrs/week</span><strong>Total: 12 sessions · 18 contact hrs/week</strong></div>
+        </div>
+        <div class="note-banner"><span>ⓘ</span><p><strong>Schedule note</strong> The timetable is based on the schedule you provided. Saturday and Sunday have no classes.</p></div>
+      </section>
+
+      <section class="view" id="view-tasks">
+        <div class="eyebrow"><span class="eyebrow-line"></span> STAY AHEAD OF THE DEADLINE</div>
+        <div class="page-title-row"><div><h1>Tasks & <span class="gradient-text">assignments.</span></h1><p class="subhead">Turn your workload into a clear next step.</p></div><button class="primary-button" id="openTaskForm">＋ Add task</button></div>
+        <section class="panel task-form-panel hidden" id="taskFormPanel">
+          <div class="panel-heading"><div><div class="section-kicker">MAKE IT ACTIONABLE</div><h2>New task</h2></div><button class="icon-button" id="closeTaskForm" aria-label="Close">×</button></div>
+          <form id="taskForm" class="task-form">
+            <label class="form-field wide-field">Task title<input id="taskTitle" required maxlength="100" placeholder="e.g. Revise Compiler Construction notes"></label>
+            <label class="form-field">Course<select id="taskCourse"><option>Compiler Construction</option><option>Cyber Security</option><option>Cloud Computing</option><option>Parallel & Distributed Computing</option><option>Numerical Analysis</option><option>Web Engineering</option><option>Personal / Other</option></select></label>
+            <label class="form-field">Due date<input id="taskDue" type="date"></label>
+            <label class="form-field">Priority<select id="taskPriority"><option value="medium">Medium</option><option value="high">High</option><option value="low">Low</option></select></label>
+            <button class="primary-button form-submit" type="submit">Save task <span>→</span></button>
+          </form>
+        </section>
+        <div class="task-toolbar"><div class="filter-tabs"><button class="filter-tab active" data-filter="all">All tasks</button><button class="filter-tab" data-filter="pending">In progress</button><button class="filter-tab" data-filter="done">Completed</button></div><span class="muted" id="taskCountLabel">0 tasks</span></div>
+        <div class="task-list" id="taskList"></div>
+      </section>
+
+      <section class="view" id="view-skills">
+        <div class="eyebrow"><span class="eyebrow-line"></span> INVEST IN YOUR FUTURE SELF</div>
+        <div class="page-title-row"><div><h1>Skill <span class="gradient-text">roadmap.</span></h1><p class="subhead">Build skills alongside your degree, one milestone at a time.</p></div><span class="roadmap-badge">PERSONAL LEARNING PATH</span></div>
+        <div class="skills-intro panel"><div class="skills-intro-copy"><span class="section-kicker">YOUR NEXT CHAPTER</span><h2>From student to <span class="gradient-text">builder.</span></h2><p>Choose a skill, make steady progress, and keep a record of the work you put in.</p></div><div class="skills-intro-art"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit-core">✦</div></div></div>
+        <div class="skills-grid" id="skillsGrid"></div>
+        <div class="note-banner"><span>✦</span><p><strong>Keep it realistic.</strong> Even 20 focused minutes a day can build momentum. Your progress is saved in this browser.</p></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
